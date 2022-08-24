@@ -75,6 +75,9 @@ export default class DetailModal {
         catWeight.className = 'cat-width';
         catWeight.innerText = `${imperial} (imperial) / ${metric} (metric)`;
 
+        this.modalWrapper.innerHTML = `
+        `
+
         closeBtn.addEventListener('click', () => { this.onClose(); });
         overlay.addEventListener('click', () => { this.onClose(); });
         
