@@ -21,14 +21,11 @@ export default class Card {
   }
 
   render() {
-    const url = this.data.url;
-    const { name, origin } =
-      this.data.breeds.length > 0
-        ? this.data.breeds[0]
-        : { name: '정보없음', origin: '정보없음' };
+    const { url, name, origin } = this.data;
+    // : { name: '정보없음', origin: '정보없음' };
 
     this.card.innerHTML = `
-    <img class="card-image lazy" src=${url}/>
+    <img class="card-image lazy" src="${url}"/>
     <article class="card-info">
         <p class="cat-name">${name}</p>
         <p class="cat-origin>${origin}</p>
