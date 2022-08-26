@@ -9,13 +9,14 @@ import { getItem, setItem } from './util/sessionStorage.js';
 
 export default class App {
   constructor($target) {
-    const keywords = getItem('keyword');
-    const data = getItem('data');
+    const keywords = getItem('keywords');
+    const data = getItem('data') ? getItem('data') : [];
 
     const searchingSection = new SearchingSection({
       $target,
       keywords,
       onSearch: async (keyword) => {
+        setItem('data', []);
         loading.toggleSpinner();
 
         const response = await api.fetchCats(keyword);
@@ -28,6 +29,7 @@ export default class App {
         loading.toggleSpinner();
       },
       onRandom: async () => {
+        setItem('data', []);
         loading.toggleSpinner();
 
         const response = await api.fetchRandomCats();
@@ -49,6 +51,22 @@ export default class App {
         const response = await api.fetchCat(id);
         if (!response.isError) {
           detailModal.setState(response.data);
+        } else {
+          error.setState(response.data);
+        }
+        loading.toggleSpinner();
+      },
+      onScroll: async () => {
+        loading.toggleSpinner();
+        const response = await api.fetchRandomCats();
+        if (!response.isError) {
+          const beforeData = getItem('data').data
+            ? getItem('data').data
+            : getItem('data');
+          const nextData = beforeData.concat(response.data.data);
+
+          setItem('data', nextData);
+          resultsSection.setState(nextData);
           loading.toggleSpinner();
         } else {
           error.setState(response.data);
