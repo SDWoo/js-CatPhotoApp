@@ -85,13 +85,14 @@ body {
 }
 
 .card-container {
-  cursor: pointer;
   display: grid;
   grid-template-columns: repeat(4, minmax(250px, 1fr));
   grid-gap: 10px;
+  margin: 0 300px;
 }
 
 .cat-card {
+  cursor: pointer;
   display: flex;
   flex-direction: column;
 
@@ -102,6 +103,7 @@ body {
 }
 
 .card-image {
+  border-radius: 5px;
   height: 70%;
 }
 
@@ -140,6 +142,7 @@ body {
   height: 70%;
   width: 30%;
   padding: 10px;
+
   background-color: var(--background);
   color: var(--text-color);
   animation: fadeIn 0.3s;
@@ -228,6 +231,7 @@ body {
 
 @media (max-width: 992px) {
   .card-container {
+    margin: 0;
     grid-template-columns: repeat(3, minmax(250px, 1fr));
   }
 }

@@ -24,7 +24,6 @@ export const api = {
       const cats = await request(
         `${API_ENDPOINT}/api/cats/search?q=${keyword}`
       );
-      console.log(cats);
       // const requests = cats.data.map(async (cat) => {
       //   return await request(`${API_ENDPOINT}/api/cats/${cat.id}`);
       // });

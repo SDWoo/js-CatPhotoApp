@@ -25,7 +25,7 @@ export default class Card {
     // : { name: '정보없음', origin: '정보없음' };
 
     this.card.innerHTML = `
-    <img class="card-image lazy" src="${url}"/>
+    <img class="card-image lazy" data-src="${url}"/>
     <article class="card-info">
         <p class="cat-name">${name}</p>
         <p class="cat-origin>${origin}</p>

@@ -1,24 +1,26 @@
 import Card from './Card.js';
-// import { lazyLoad } from '../util/lazyLoad.js';
-// import { scrollFetch } from '../util/scrollFetch.js';
+import { lazyLoad } from '../util/lazyLoad.js';
+import { scrollFetch } from '../util/scrollFetch.js';
 
 export default class ResultsSection {
-  constructor({ $target, data, onClick }) {
-    this.data = data;
+  constructor({ $target, data, onClick, onScroll }) {
+    this.data = data ? data.data : data;
     this.onClick = onClick;
+    this.onScroll = onScroll;
     this.section = document.createElement('section');
     this.section.className = 'results-section';
 
     $target.appendChild(this.section);
 
     this.render();
-    // lazyLoad();
+    lazyLoad();
+    scrollFetch(this.onScroll);
   }
 
   setState(data) {
-    this.data = data.data;
+    this.data = data.data ? data.data : data;
     this.render();
-    // lazyLoad();
+    lazyLoad();
   }
 
   findCatById(id) {
@@ -31,6 +33,7 @@ export default class ResultsSection {
 
     this.section.innerHTML = '';
 
+    console.log(this.data);
     if (this.data.length > 0) {
       const cardContainer = document.createElement('div');
       cardContainer.className = 'card-container';
@@ -48,7 +51,6 @@ export default class ResultsSection {
 
         if (card) {
           const id = card.dataset.id;
-          const catInfo = this.findCatById(id);
 
           this.onClick(id);
         }
@@ -62,20 +64,6 @@ export default class ResultsSection {
                 <img class="notice-image" src="src/img/emptybox.png"></img>
             </section>
         `;
-      //   const noticeSection = document.createElement('section');
-      //   noticeSection.className = 'notice-section';
-
-      //   const notice = document.createElement('h2');
-      //   notice.className = 'notice';
-      //   notice.innerText = '검색 결과가 없습니다.';
-
-      //   const noticeImage = document.createElement('img');
-      //   noticeImage.className = 'notice-image';
-      //   noticeImage.src = 'src/img/emptybox.png';
-
-      //   noticeSection.appendChild(notice);
-      //   noticeSection.appendChild(noticeImage);
-      //   this.section.appendChild(noticeSection);
     }
   }
 }
